@@ -20,7 +20,7 @@ This project is designed as a beginner-friendly full-stack application.
 
 ## Scope
 
-### ✅ In Scope (MVP Features)
+### In Scope (MVP Features)
 
 * Single user data handling
 * Manual expense entry
