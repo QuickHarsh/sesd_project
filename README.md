@@ -113,3 +113,9 @@ Note: all expense and dashboard endpoints require `Authorization: Bearer <token>
 - Validate API payloads and return readable error messages.
 - Keep frontend use-cases as the integration boundary with API services.
 - Update `.env.example` files whenever new configuration keys are introduced.
+
+## Architecture Notes
+
+- Controllers only orchestrate request and response handling.
+- Services hold business rules and validation.
+- Repositories isolate persistence and query concerns.
