@@ -31,3 +31,9 @@ npm run dev
 ```
 
 Default dev URL: `http://localhost:5173`
+
+## Scripts
+
+- `npm run dev` - start development server
+- `npm run build` - create production build
+- `npm run preview` - preview production build locally
