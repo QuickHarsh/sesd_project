@@ -17,3 +17,13 @@ export const CATEGORY_LABELS = {
   Shopping: "Shopping",
   Other: "Other",
 };
+
+export const CATEGORY_ORDER = [
+  "Food",
+  "Rent",
+  "Transport",
+  "Health",
+  "Shopping",
+  "Entertainment",
+  "Other",
+];
