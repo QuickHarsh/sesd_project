@@ -1,3 +1,5 @@
+import { CATEGORY_LABELS } from "../constants/categories";
+
 function currency(amount) {
   const parsed = Number(amount);
   const safeAmount = Number.isFinite(parsed) ? parsed : 0;
@@ -10,7 +12,13 @@ function currency(amount) {
 
 function formatDate(isoDate) {
   const date = new Date(isoDate);
-  return Number.isNaN(date.getTime()) ? "Invalid date" : date.toLocaleDateString("en-IN");
+  return Number.isNaN(date.getTime())
+    ? "Invalid date"
+    : date.toLocaleDateString("en-IN");
+}
+
+function categoryLabel(category) {
+  return CATEGORY_LABELS[category] || category || "Uncategorized";
 }
 
 export function ExpenseTable({ items, onEdit, onDelete }) {
@@ -39,7 +47,7 @@ export function ExpenseTable({ items, onEdit, onDelete }) {
               <td>{currency(expense.amount)}</td>
               <td>{formatDate(expense.date)}</td>
               <td>
-                <span className="pill">{expense.category}</span>
+                <span className="pill">{categoryLabel(expense.category)}</span>
               </td>
               <td className="action-cell">
                 <button className="ghost-btn" onClick={() => onEdit(expense)}>
