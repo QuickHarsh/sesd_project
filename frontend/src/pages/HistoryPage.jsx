@@ -95,6 +95,16 @@ export function HistoryPage({ expenseUseCase, onAuthError }) {
               ))}
             </select>
           </label>
+
+          {selectedCategory ? (
+            <button
+              type="button"
+              className="ghost-btn"
+              onClick={() => setSelectedCategory("")}
+            >
+              Clear filter
+            </button>
+          ) : null}
         </div>
 
         {error ? <p className="error-text">{error}</p> : null}
