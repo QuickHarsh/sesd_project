@@ -119,3 +119,9 @@ Note: all expense and dashboard endpoints require `Authorization: Bearer <token>
 - Controllers only orchestrate request and response handling.
 - Services hold business rules and validation.
 - Repositories isolate persistence and query concerns.
+
+## Troubleshooting
+
+- If login fails unexpectedly, confirm backend and frontend use the same API base URL.
+- If CORS errors appear, ensure CLIENT_ORIGINS includes your frontend dev host.
+- If Mongo connection fails, verify MONGODB_URI and local database availability.
