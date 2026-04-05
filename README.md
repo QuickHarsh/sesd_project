@@ -100,3 +100,9 @@ Backend runs on `http://localhost:5001`.
 - `GET /api/dashboard/summary`
 
 Note: all expense and dashboard endpoints require `Authorization: Bearer <token>`.
+
+## Project Milestones
+
+- Layered backend architecture wired with controllers, services, and repositories.
+- Frontend organized by domain models, use-cases, and reusable components.
+- JWT-based auth and protected API routes integrated across the stack.
