@@ -48,6 +48,11 @@ export function HistoryPage({ expenseUseCase, onAuthError }) {
   };
 
   const handleDelete = async (id) => {
+    const shouldDelete = window.confirm("Delete this expense entry?");
+    if (!shouldDelete) {
+      return;
+    }
+
     try {
       await expenseUseCase.remove(id);
       await loadExpenses(selectedCategory);
