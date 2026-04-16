@@ -6,5 +6,7 @@ export async function connectDatabase(mongoUri) {
   }
 
   mongoose.set("strictQuery", true);
-  await mongoose.connect(mongoUri);
+  await mongoose.connect(mongoUri, {
+    serverSelectionTimeoutMS: 5000,
+  });
 }
