@@ -1,0 +1,4 @@
+# Local backend environment secrets
+.env
+.env.*
+!.env.example
