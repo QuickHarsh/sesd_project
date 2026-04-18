@@ -106,3 +106,10 @@ Note: all expense and dashboard endpoints require `Authorization: Bearer <token>
 - Layered backend architecture wired with controllers, services, and repositories.
 - Frontend organized by domain models, use-cases, and reusable components.
 - JWT-based auth and protected API routes integrated across the stack.
+
+## Development Checklist
+
+- Keep domain logic inside services/repositories instead of route handlers.
+- Validate API payloads and return readable error messages.
+- Keep frontend use-cases as the integration boundary with API services.
+- Update `.env.example` files whenever new configuration keys are introduced.
