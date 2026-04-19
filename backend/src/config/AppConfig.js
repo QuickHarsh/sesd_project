@@ -11,7 +11,7 @@ export class AppConfig {
   static CLIENT_ORIGINS = (
     process.env.CLIENT_ORIGINS ||
     process.env.CLIENT_ORIGIN ||
-    "http://localhost:5173,http://localhost:5174"
+    "http://localhost:5173,http://localhost:5174,https://expense-manager-frontend-roan.vercel.app"
   )
     .split(",")
     .map((origin) => origin.trim())
