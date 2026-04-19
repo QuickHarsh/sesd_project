@@ -114,6 +114,37 @@ Note: all expense and dashboard endpoints require `Authorization: Bearer <token>
 - Keep frontend use-cases as the integration boundary with API services.
 - Update `.env.example` files whenever new configuration keys are introduced.
 
+## Deploy On Vercel
+
+Deploy frontend and backend as two separate Vercel projects from this same repository.
+
+### Backend (Vercel Project 1)
+
+1. Create a new Vercel project and set Root Directory to `backend`.
+2. Add environment variables:
+	- `MONGODB_URI`
+	- `JWT_SECRET`
+	- `JWT_EXPIRES_IN` (optional, default `7d`)
+	- `CLIENT_ORIGINS` (comma-separated, include your frontend Vercel URL)
+	- `NODE_ENV=production`
+3. Deploy. The API will serve routes such as:
+	- `/api/health`
+	- `/api/auth/login`
+	- `/api/expenses`
+
+### Frontend (Vercel Project 2)
+
+1. Create another Vercel project and set Root Directory to `frontend`.
+2. Add environment variable:
+	- `VITE_API_BASE_URL=https://your-backend-project.vercel.app/api`
+3. Deploy.
+
+### CORS Notes
+
+- Backend CORS is controlled by `CLIENT_ORIGINS`.
+- Add your exact frontend URL (for example `https://spendsmart-frontend.vercel.app`).
+- You can also use wildcard entries like `*.vercel.app` when needed.
+
 ## Architecture Notes
 
 - Controllers only orchestrate request and response handling.

@@ -31,6 +31,22 @@ npm run dev
 
 Health check endpoint: `GET /api/health`
 
+## Deploy To Vercel
+
+This backend is configured for Vercel Serverless Functions.
+
+1. Import repository in Vercel.
+2. Set Root Directory to `backend`.
+3. Configure environment variables:
+	- `MONGODB_URI`
+	- `JWT_SECRET`
+	- `JWT_EXPIRES_IN`
+	- `CLIENT_ORIGINS`
+	- `NODE_ENV=production`
+4. Deploy.
+
+`vercel.json` rewrites all incoming paths to `api/index.js`, and the Express app handles route matching internally.
+
 ## Request Lifecycle
 
 1. Route receives request and applies auth middleware where needed.

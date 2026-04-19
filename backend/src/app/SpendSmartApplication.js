@@ -37,6 +37,15 @@ export class SpendSmartApplication {
   }
 
   #configureMiddleware() {
+    this.app.set("trust proxy", 1);
+
+    this.app.use((req, res, next) => {
+      res.setHeader("X-Content-Type-Options", "nosniff");
+      res.setHeader("X-Frame-Options", "DENY");
+      res.setHeader("Referrer-Policy", "strict-origin-when-cross-origin");
+      next();
+    });
+
     this.app.use(
       cors({
         origin: (origin, callback) => {
@@ -46,7 +55,7 @@ export class SpendSmartApplication {
             return;
           }
 
-          if (AppConfig.CLIENT_ORIGINS.includes(origin)) {
+          if (AppConfig.isAllowedOrigin(origin)) {
             callback(null, true);
             return;
           }
