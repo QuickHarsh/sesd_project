@@ -10,6 +10,7 @@ export function DashboardPage({ dashboardUseCase, onAuthError }) {
     chartData: [],
   });
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     let mounted = true;
@@ -17,13 +18,18 @@ export function DashboardPage({ dashboardUseCase, onAuthError }) {
     async function loadSummary() {
       try {
         setLoading(true);
+        setError("");
         const data = await dashboardUseCase.getSummary();
         if (mounted) {
           setSummary(data);
         }
-      } catch (error) {
-        if (error?.response?.status === 401) {
+      } catch (loadError) {
+        if (loadError?.response?.status === 401) {
           onAuthError();
+          return;
+        }
+        if (mounted) {
+          setError("Unable to load dashboard summary.");
         }
       } finally {
         if (mounted) {
@@ -51,6 +57,8 @@ export function DashboardPage({ dashboardUseCase, onAuthError }) {
       <KpiCard title="Total Spent This Month" value={summary.monthlyTotal} />
 
       <RecentActivity items={summary.recentActivity} />
+
+      {error ? <p className="panel error-text">{error}</p> : null}
 
       {loading ? (
         <p className="panel loading">Loading chart...</p>

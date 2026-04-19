@@ -100,3 +100,59 @@ Backend runs on `http://localhost:5001`.
 - `GET /api/dashboard/summary`
 
 Note: all expense and dashboard endpoints require `Authorization: Bearer <token>`.
+
+## Project Milestones
+
+- Layered backend architecture wired with controllers, services, and repositories.
+- Frontend organized by domain models, use-cases, and reusable components.
+- JWT-based auth and protected API routes integrated across the stack.
+
+## Development Checklist
+
+- Keep domain logic inside services/repositories instead of route handlers.
+- Validate API payloads and return readable error messages.
+- Keep frontend use-cases as the integration boundary with API services.
+- Update `.env.example` files whenever new configuration keys are introduced.
+
+## Deploy On Vercel
+
+Deploy frontend and backend as two separate Vercel projects from this same repository.
+
+### Backend (Vercel Project 1)
+
+1. Create a new Vercel project and set Root Directory to `backend`.
+2. Add environment variables:
+   - `MONGODB_URI`
+   - `JWT_SECRET`
+   - `JWT_EXPIRES_IN` (optional, default `7d`)
+   - `CLIENT_ORIGINS` (comma-separated, include your frontend Vercel URL)
+   - `NODE_ENV=production`
+3. Deploy. The API will serve routes such as:
+   - `/api/health`
+   - `/api/auth/login`
+   - `/api/expenses`
+
+### Frontend (Vercel Project 2)
+
+1. Create another Vercel project and set Root Directory to `frontend`.
+2. Add environment variable:
+   - `VITE_API_BASE_URL=https://your-backend-project.vercel.app/api`
+3. Deploy.
+
+### CORS Notes
+
+- Backend CORS is controlled by `CLIENT_ORIGINS`.
+- Add your exact frontend URL (for example `https://spendsmart-frontend.vercel.app`).
+- You can also use wildcard entries like `*.vercel.app` when needed.
+
+## Architecture Notes
+
+- Controllers only orchestrate request and response handling.
+- Services hold business rules and validation.
+- Repositories isolate persistence and query concerns.
+
+## Troubleshooting
+
+- If login fails unexpectedly, confirm backend and frontend use the same API base URL.
+- If CORS errors appear, ensure CLIENT_ORIGINS includes your frontend dev host.
+- If Mongo connection fails, verify MONGODB_URI and local database availability.

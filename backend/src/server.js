@@ -7,9 +7,19 @@ async function bootstrap() {
 
   const app = new SpendSmartApplication().getExpressApp();
 
-  app.listen(AppConfig.PORT, () => {
+  const server = app.listen(AppConfig.PORT, () => {
     console.log(`SpendSmart backend running on port ${AppConfig.PORT}`);
   });
+
+  const shutdown = (signal) => {
+    console.log(`Received ${signal}. Closing HTTP server...`);
+    server.close(() => {
+      process.exit(0);
+    });
+  };
+
+  process.on("SIGINT", () => shutdown("SIGINT"));
+  process.on("SIGTERM", () => shutdown("SIGTERM"));
 }
 
 bootstrap().catch((error) => {

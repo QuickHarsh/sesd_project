@@ -35,8 +35,15 @@ export function ExpenseForm({ currentExpense, onCancel, onSave, isSaving }) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
+    const normalizedPayload = {
+      ...formData,
+      title: formData.title.trim(),
+      amount: Number(formData.amount),
+    };
+
     try {
-      await onSave(formData);
+      await onSave(normalizedPayload);
       if (!currentExpense) {
         setFormData(initialFormState);
       }

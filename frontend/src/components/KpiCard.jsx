@@ -6,11 +6,16 @@ function currency(amount) {
   }).format(amount);
 }
 
+function normalizeAmount(value) {
+  const parsed = Number(value);
+  return Number.isFinite(parsed) ? parsed : 0;
+}
+
 export function KpiCard({ title, value }) {
   return (
     <article className="panel kpi-card">
       <p>{title}</p>
-      <h2>{currency(value)}</h2>
+      <h2>{currency(normalizeAmount(value))}</h2>
     </article>
   );
 }

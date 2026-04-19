@@ -4,9 +4,11 @@ import { DashboardUseCase } from "../application/use-cases/DashboardUseCase";
 import { AuthUseCase } from "../application/use-cases/AuthUseCase";
 
 const apiBaseURL =
-  import.meta.env.VITE_API_BASE_URL || "http://localhost:5001/api";
+  import.meta.env.VITE_API_BASE_URL || "http://localhost:5001/api"\;
 
-const expenseApiService = new ExpenseApiService(apiBaseURL);
+const normalizedApiBaseURL = apiBaseURL.replace(/\/$/, "");
+
+const expenseApiService = new ExpenseApiService(normalizedApiBaseURL);
 
 export const container = {
   expenseUseCase: new ExpenseUseCase(expenseApiService),

@@ -48,6 +48,11 @@ export function HistoryPage({ expenseUseCase, onAuthError }) {
   };
 
   const handleDelete = async (id) => {
+    const shouldDelete = window.confirm("Delete this expense entry?");
+    if (!shouldDelete) {
+      return;
+    }
+
     try {
       await expenseUseCase.remove(id);
       await loadExpenses(selectedCategory);
@@ -90,6 +95,16 @@ export function HistoryPage({ expenseUseCase, onAuthError }) {
               ))}
             </select>
           </label>
+
+          {selectedCategory ? (
+            <button
+              type="button"
+              className="ghost-btn"
+              onClick={() => setSelectedCategory("")}
+            >
+              Clear filter
+            </button>
+          ) : null}
         </div>
 
         {error ? <p className="error-text">{error}</p> : null}
